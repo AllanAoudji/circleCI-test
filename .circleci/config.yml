@@ -22,8 +22,15 @@ jobs:
           paths:
             - .yarn/cache
             - .yarn/unplugged
+  build-test:
+    docker:
+      - image: cimg/node:16.14.0
+    steps:
+      - checkout
+      - run: npm --version
 
 workflows:
   test-deploy:
     jobs:
       - test
+      - build-test
