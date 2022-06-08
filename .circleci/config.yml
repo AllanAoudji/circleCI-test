@@ -1,6 +1,12 @@
 version: 2.1
 
 jobs:
+  test:
+    docker:
+      - image: cimg/node:18.3.0
+    steps:
+      - checkout
+      - run: node --version
   say-hello:
     docker:
       - image: cimg/base:stable
@@ -11,6 +17,6 @@ jobs:
           command: 'echo Hello, World!'
 
 workflows:
-  say-hello-workflow:
+  test-deploy:
     jobs:
-      - say-hello
+      - test
