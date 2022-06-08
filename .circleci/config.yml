@@ -11,7 +11,7 @@ jobs:
           command: cd ios && fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: CircleCIDemoReactNative
+            SCAN_SCHEME: ultimateTicTacToeUI
       - store_test_results:
           path: test_output/report.xml
       - store_artifacts:
