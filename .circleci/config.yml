@@ -38,8 +38,8 @@ workflows:
     jobs:
       - install-dependencies
       - test:
-        requires:
-          - install-dependencies
+          requires:
+            - install-dependencies
       - save-cache:
-        requires:
-          - test
+          requires:
+            - test
