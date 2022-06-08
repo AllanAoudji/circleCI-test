@@ -6,7 +6,12 @@ jobs:
       - image: cimg/node:16.14.0
     steps:
       - checkout
-      - run: node --version
+      - run:
+        name: Install depedencies
+        command: yarn install --immutable
+      - run:
+        name: Run tests
+        command: yarn test
   say-hello:
     docker:
       - image: cimg/base:stable
