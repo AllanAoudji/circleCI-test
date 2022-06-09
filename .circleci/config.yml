@@ -1,57 +1,16 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@4.7.0
+
 jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.15
-    steps:
-      - run:
-          name: Saying Hello
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-  Fetch-Code:
-    docker:
-      - image: cimg/base:2021.04
+  build:
+    executor:
+      name: node/default
+      tag: '10.4'
     steps:
       - checkout
-      - run:
-          name: Getting the Code
-          command: |
-            ls -al
-            echo '^^^Your repo files^^^'
-  Using-Node:
-    docker:
-      - image: cimg/node:17.2
-    steps:
-      - run:
-          name: Running the Node Container
-          command: |
-            node -v
-  Now-Complete:
-    docker:
-      - image: alpine:3.15
-    steps:
-      - run:
-          name: Approval Complete
-          command: |
-            echo 'The work is now complete.'
-
-workflows:
-  Exemple-Workflow:
-    jobs:
-      - Hello-World
-      - Fetch-Code:
-          requires:
-            - Hello-World
-      - Using-Node:
-          requires:
-            - Fetch-Code
-      - Hold-for-Approval:
-          type: approval
-          requires:
-            - Using-Node
-            - Fetch-Code
-      - Now-Complete:
-          requires:
-            - Hold-for-Approval
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npm run test
