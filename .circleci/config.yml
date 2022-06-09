@@ -18,9 +18,16 @@ jobs:
     steps:
       - checkout
       - run: echo "hello world"
+  build-macos:
+    macos:
+      xcode: 12.5.1
+    steps:
+      - checkout
+      - run: echo "hello world"
 
 workflows:
   build-different-hello-world:
     jobs:
       - build
       - build-android
+      - build-macos
