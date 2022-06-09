@@ -12,25 +12,25 @@ jobs:
       - slack/notify:
           event: pass
           template: success_tagged_deploy_1
-    build:
-      docker:
-        - image: python:3.6.3-jessie
-          auth:
-            username: mydockerhub-user
-            password: $DOCKERHUB_PASSWORD
-      working_directory: /tmp
-      steps:
-        - run:
-            name: Creating Dummy Artifacts
-            command: |
-              echo "my artifact file" > /tmp/artifact-1;
-              mkdir /tmp/artifacts;
-              echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-        - store_artifacts:
-            path: /tmp/artifact-1
-            destination: artifact-file
-        - store_artifacts:
-            path: /tmp/artifacts
+  build:
+    docker:
+      - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
+    working_directory: /tmp
+    steps:
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > /tmp/artifact-1;
+            mkdir /tmp/artifacts;
+            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
+      - store_artifacts:
+          path: /tmp/artifact-1
+          destination: artifact-file
+      - store_artifacts:
+          path: /tmp/artifacts
 
 workflows:
   send-notification:
