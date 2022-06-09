@@ -11,7 +11,7 @@ jobs:
             {
               "blocks": [
                 {
-                  "type": "section"
+                  "type": "section",
                   "fields": [
                     {
                       "type": "plain_text",
